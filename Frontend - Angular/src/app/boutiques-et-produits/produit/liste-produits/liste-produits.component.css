@@ -1,0 +1,18 @@
+.custom-resize-produit{
+    display: block;
+    max-height: 100%;
+    width: auto;
+    margin: auto;
+  }
+  
+  .conteneur-produit{
+    /* width: 720px;
+    height: 960px ; */
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    position: relative;                    
+    display: flex;
+    align-items: center;
+     
+  }

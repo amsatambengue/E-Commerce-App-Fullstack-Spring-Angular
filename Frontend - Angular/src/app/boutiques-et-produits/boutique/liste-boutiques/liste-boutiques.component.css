@@ -1,0 +1,11 @@
+/* .center {
+    margin: auto;
+    width: 99%;
+    padding: 1%;
+  }  */
+
+  @import "../details-boutique/details-boutique.component.css";
+  
+  .star{
+    size: 1%;
+  }

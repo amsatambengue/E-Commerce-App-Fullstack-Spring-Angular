@@ -1,0 +1,31 @@
+
+
+<div *ngIf="!utilisateurActuelEstProprietaire; else utilisateurNonProprietaire">
+    <div class="container">
+        <div class="contacts">
+            <a target="_blank" [href]="'tel:'+telephone"><i class="fa fa-phone fa-2x telephone" aria-hidden="true"> {{telephone}}</i></a>
+            <a target="_blank" [href]="'https://api.whatsapp.com/send?phone='+whatsapp+'&text='+message+lien"><i class="fa fa fa-whatsapp fa-2x whatsapp" aria-hidden="true"> {{whatsapp}}</i></a>
+            <!-- [href]="'https://api.whatsapp.com/send?text='+lienProduit" -->
+            <!-- <a href="#"><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa fa-youtube fa-3x" aria-hidden="true"></i></a> -->
+        </div>
+    </div>
+</div>
+
+<ng-template #utilisateurNonProprietaire>
+    <div class="container">
+        <div class="contacts">
+            <i class="fa fa-phone fa-2x" aria-hidden="true">  
+                <input id="contactTelephone" [disabled]="estNonModifiable" (focusout)="saveContact()" class="telephone editable flex-c-m" [(ngModel)]="telephone">
+            </i>
+
+            <a><i class="fa fa fa-whatsapp fa-2x"  aria-hidden="true">  
+                <input id="contactWhatsapp" [disabled]="estNonModifiable" (focusout)="saveContact()" class="whatsapp editable" [(ngModel)]="whatsapp">
+            </i></a>
+        
+        </div>
+    </div>
+
+</ng-template>

@@ -1,0 +1,25 @@
+<!-- Le fichier CSS corespondant est "main.css" dans "src/assets/css" -->
+<!-- Si il s'agilt d'un utilisateur connecté et proprietaire du produit -->
+<ul *ngIf="utilisateurEstProprietaire" class="flex-w">
+    <li *ngFor="let couleur of this.paletteCouleurs" class="m-r-10">
+        <input [disabled]="desactive" [(ngModel)]="couleur.disponible"
+            (change)="onItemSelectionne(couleur.disponible? true:false)" class="checkbox-color-filter"
+            [id]="couleur.nom" type="checkbox" [(checked)]="couleur.disponible" [name]="couleur.nom">
+        <label class="color-filter" [ngClass]="couleur.nom" [for]="couleur.nom"></label>
+        <!-- {{couleur.disponible}} -->
+    </li>
+</ul>
+
+<!-- Si il s'agilt d'un utilisateur non connecté -->
+<ul *ngIf="!utilisateurEstProprietaire" class="flex-w">
+    <li *ngFor="let couleur of this.paletteCouleurs" class="m-r-10">
+        <div *ngIf="couleur.disponible">
+            <!-- Checked et ngModel supprimé par rapport à l'utilisateur connecté -->
+            <input [disabled]="desactive" 
+                (change)="onItemSelectionne(couleur.disponible? true:false)" class="checkbox-color-filter"
+                [id]="couleur.nom" type="checkbox" [name]="couleur.nom">
+            <label class="color-filter" [ngClass]="couleur.nom" [for]="couleur.nom"></label>
+            <!-- {{couleur.disponible}} -->
+        </div>
+    </li>
+</ul>

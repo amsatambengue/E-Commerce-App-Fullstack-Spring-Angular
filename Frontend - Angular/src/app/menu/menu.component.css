@@ -1,0 +1,45 @@
+/* @import "../../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css"; */
+/* @import "http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"; */
+.txt-logo{
+  text-transform: uppercase;
+  font-size: xx-large ;
+
+  color: black;
+  font-weight: bold;
+  font-family: Impact;
+
+}
+
+
+.txt3{
+    font-size:80%;
+    right: 20%;
+    color: firebrick;
+    position:absolute;
+  
+  }
+
+
+.noDecoration{
+    text-decoration: none; 
+  }
+
+  /* unvisited link */
+  .noDecoration:link {
+    color: rgb(125, 126, 129);
+  }
+  
+  /* visited link */
+  .noDecoration:visited {
+    color: rgb(125, 126, 129);
+  }
+  
+  /* mouse over link */
+  .noDecoration:hover {
+    color: rgb(0, 0, 0);
+  }
+  
+  /* selected link */
+ .noDecoration:active {
+    color: rgb(125, 126, 129);
+  }

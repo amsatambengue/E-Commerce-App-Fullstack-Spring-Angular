@@ -1,0 +1,6 @@
+.disabled {
+    /* Le rend non cliquable */
+    pointer-events:none; 
+    /* Réduit son apacité */
+    opacity:0.3;         
+}

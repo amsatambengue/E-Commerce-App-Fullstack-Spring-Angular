@@ -1,0 +1,531 @@
+<!-- <div *ngIf="estUnFormulaireLogin; then appLogin else appInscription"></div>
+    <ng-template #appLogin>
+      <app-login></app-login>
+    </ng-template>
+    <ng-template #appInscription>
+      <app-inscription></app-inscription>
+    </ng-template> -->
+
+
+    <app-login></app-login>
+    <!-- Header -->
+    <header class="header1">
+    
+      <!-- Header desktop -->
+      <div class="container-menu-header">
+        <div class="topbar">
+          <div class="topbar-social">
+            <a href="#" class="topbar-social-item fa fa-facebook"></a>
+            <a href="#" class="topbar-social-item fa fa-instagram"></a>
+            <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+            <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+            <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+          </div>
+    
+          <span class="topbar-child1">
+            {{txtTopbar}}
+    
+    
+          </span>
+    
+          <div class="topbar-child2">
+            <span class="topbar-email">
+              {{txtInfoMail}}
+            </span>
+    
+            <!-- <div class="topbar-language rs1-select2">
+                <select class="selection-1" name="time">
+                  <option>USD</option>
+                  <option>EUR</option>
+                </select>
+              </div> -->
+          </div>
+        </div>
+    
+        <div class="wrap_header">
+          <!-- Logo -->
+          <a [href]="this.utilsService.nomSiteWeb" class="logo txt-logo">
+            <!-- <img src="assets/images/icons/logo3.png" alt="IMG-LOGO"> -->
+            <!-- {{this.produitService.produit.boutique.nom}} -->
+            {{this.utilsService.nomSiteWeb}}
+          </a>
+    
+          <!-- Menu -->
+          <div class="wrap_menu">
+            <nav class="menu">
+              <ul class="main_menu">
+                <li>
+                  <a href="accueil">{{txtAccueil}}</a>
+                  <!-- <ul class="sub_menu">
+                      <li><a href="index.html">Homepage V1</a></li>
+                      <li><a href="home-02.html">Homepage V2</a></li>
+                      <li><a href="home-03.html">Homepage V3</a></li>
+                    </ul> -->
+                </li>
+    
+                <li>
+                  <a href="shopping">{{txtShopping}}</a>
+                </li>
+    
+                <!-- <li class="sale-noti">
+                    <a href="product.html">Sale</a>
+                  </li> -->
+    
+                <!-- <li>
+                    <a href="cart.html">Features</a>
+                  </li> -->
+    
+                <!-- <li>
+                    <a href="blog.html">Blog</a>
+                  </li> -->
+    
+                <li>
+                  <a href="about.html">{{txtAPropos}}</a>
+                </li>
+    
+                <li>
+                  <a href="contact.html">{{txtContact}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+    
+          
+          <!-- Header Icon -->
+          <div class="header-icons">
+    
+            <!-- Bouton Compte 2ng Gen-->
+            <div class="account-wrap">
+              <div *ngIf="verifConnection(); then compteBlock else toggleBlock"></div>
+              <!-- Bouton si Utilisateur Connecté -->
+              <ng-template #compteBlock>
+                <div class="account-item clearfix js-item-menu">
+                    <div class="image">
+                        <img src="assets\MenuAssets\images\icon/avatar-11.jpg" alt="Fatou Seck" />
+                    </div>
+                    <div class="content">
+                        <a class="js-acc-btn" href="/compte">{{utilisateur.prenom}} {{utilisateur.nom}}</a>
+                    </div>
+                    <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                            <div class="image">
+                                <a href="/compte">
+                                    <img src="assets\MenuAssets\images\icon/avatar-11.jpg" alt="Fatou Seck" />
+                                </a>
+                            </div>
+                            <div class="content">
+                                <h5 class="name">
+                                    <a href="/compte">{{utilisateur.prenom}} {{utilisateur.nom}}</a>
+                                </h5>
+                                <span class="email">{{utilisateur.email}}</span>
+                            </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="/compte">
+                                    <i class="zmdi zmdi-account"></i>Compte</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="/compte">
+                                    <i class="zmdi zmdi-settings"></i>Paramètres</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="mes-boutiques">
+                                    <i class="zmdi zmdi-money-box"></i>Mes Boutiques</a>
+                            </div>
+                        </div>
+                        <div (click)="logout()" class="account-dropdown__footer">
+                            <a href="javascript:noReactionLink()">
+                                <i class="zmdi zmdi-power"></i>{{txtDeconnexion}}</a>
+                        </div>
+    
+    
+                    </div>
+                </div>
+              </ng-template>
+              <!-- Bouton si Utilisateur Non Connecté -->
+              <ng-template #toggleBlock>
+                <div class="account-item clearfix js-item-menu">
+                  <div class="image">
+                      <img src="assets/images/icons/icon-header-01.png" alt="John Doe" />
+                  </div>
+                  <div class="content">
+                      <a class="js-acc-btn" href="#">Se Connecter</a>
+                  </div>
+                  <div class="account-dropdown js-dropdown">
+                      <div class="account-dropdown__body">
+                          <div class="account-dropdown__item">
+                              <a href="authentification/connexion">
+                                  <i class="zmdi zmdi-account"></i>Se Connecter</a>
+                          </div>
+                         
+                      </div>
+                      <div class="account-dropdown__footer">
+                          <a href="authentification/inscription">
+                              <i class="zmdi zmdi-account"></i>Créer Compte</a>
+                      </div>
+                  </div>
+              </div>
+              </ng-template>
+              
+          </div>
+    
+            <!-- Ligne de division -->
+            <span class="linedivide1"></span>
+            <!-- Ligne de division -->
+    
+            <!-- Bouton Panier -->
+            <div class="header-wrapicon2">
+              <img src="assets/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+              <span class="header-icons-noti">0</span>
+    
+              <!-- Header cart noti -->
+              <div class="header-cart header-dropdown">
+                <ul class="header-cart-wrapitem">
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="http://127.0.0.1:8887/Produits/item-cart-03.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Montre Habza
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x 15 000 FCFA
+                      </span>
+                    </div>
+                  </li>
+    
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="http://127.0.0.1:8887/Produits/item-cart-02.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Converse All Star Habza
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x 17 000 FCFA
+                      </span>
+                    </div>
+                  </li>
+    
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="assets/images/item-cart-03.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Nixon Porter Leather Watch In Tan
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x $17.00
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+    
+                <div class="header-cart-total">
+                  Total: 50 000 FCFA
+                </div>
+    
+                <div class="header-cart-buttons">
+                  <div class="header-cart-wrapbtn">
+                    <!-- Button -->
+                    <a href="panier" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                      {{txtVoirPanier}}
+                    </a>
+                  </div>
+    
+                  <div class="header-cart-wrapbtn">
+                    <!-- Button -->
+                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                      {{txtReglerNote}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+    
+    
+    
+    
+    
+            <ng-template #toggleBlock>
+              <a (click)=moveForm() onclick="togglePopup()" class="header-wrapicon1 dis-block">
+                <img src="assets/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+              </a>
+            </ng-template>
+            <!-- </div> -->
+    
+            <!-- ------------- -->
+    
+    
+    
+          </div>
+        </div>
+      </div>
+    
+      <!-- Header Mobile -->
+      <div class="wrap_header_mobile">
+        <!-- Logo moblie -->
+        <a [href]="this.utilsService.nomSiteWeb" class="logo-mobile txt-logo">
+          <!-- <img src="assets/images/icons/logo2.png" alt="IMG-LOGO"> -->
+          {{this.utilsService.nomSiteWeb}}
+        </a>
+    
+        <!-- Button show menu -->
+        <div class="btn-show-menu">
+          <!-- Header Icon mobile -->
+          <div class="header-icons-mobile">
+    
+            <!-- Bouton Compte 2ng Gen-->
+            <div class="account-wrap">
+              <div *ngIf="verifConnection(); then compteBlock else toggleBlock"></div>
+              <!-- Bouton si Utilisateur Connecté -->
+              <ng-template #compteBlock>
+                <div class="account-item clearfix js-item-menu">
+                    <div class="image">
+                        <img src="assets\MenuAssets\images\icon/avatar-04.jpg" alt="John Doe" />
+                    </div>
+                    <div class="content">
+                        <a class="js-acc-btn" href="#">john doe</a>
+                    </div>
+                    <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="assets\MenuAssets\images\icon/avatar-04.jpg" alt="John Doe" />
+                                </a>
+                            </div>
+                            <div class="content">
+                                <h5 class="name">
+                                    <a href="#">john doe</a>
+                                </h5>
+                                <span class="email">johndoe@example.com</span>
+                            </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-account"></i>Account</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-settings"></i>Setting</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
+                            </div>
+                        </div>
+                        <div (click)="logout()" class="account-dropdown__footer">
+                          <a href="#">
+                              <i class="zmdi zmdi-power"></i>{{txtDeconnexion}}</a>
+                      </div>
+                    </div>
+                </div>
+              </ng-template>
+              <!-- Bouton si Utilisateur Non Connecté -->
+              <ng-template #toggleBlock>
+                <div class="account-item clearfix js-item-menu">
+                  <div class="image">
+                      <img src="assets/images/icons/icon-header-01.png" alt="John Doe" />
+                  </div>
+                  <div class="content">
+                      <a class="js-acc-btn" href="#">Se Connecter</a>
+                  </div>
+                  <div class="account-dropdown js-dropdown">
+                      <div class="account-dropdown__body">
+                          <div class="account-dropdown__item">
+                              <a href="authentification/connexion">
+                                  <i class="zmdi zmdi-account"></i>Se Connecter</a>
+                          </div>
+                         
+                      </div>
+                      <div class="account-dropdown__footer">
+                          <a href="authentification/inscription">
+                              <i class="zmdi zmdi-account"></i>Créer Compte</a>
+                      </div>
+                  </div>
+              </div>
+              </ng-template>
+              
+          </div>
+    
+            <!-- Ligne de division -->
+            <span class="linedivide1"></span>
+            <!-- Ligne de division -->
+    
+            <div class="header-wrapicon2">
+              <img src="assets/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+              <span class="header-icons-noti">0</span>
+    
+              <!-- Header cart noti -->
+              <div class="header-cart header-dropdown">
+                <ul class="header-cart-wrapitem">
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="http://127.0.0.1:8887/Produits/item-cart-03.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Montre Habza
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x $19.00
+                      </span>
+                    </div>
+                  </li>
+    
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="assets/images/item-cart-02.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Converse All Star Hi Black Canvas
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x $39.00
+                      </span>
+                    </div>
+                  </li>
+    
+                  <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                      <img src="assets/images/item-cart-03.jpg" alt="IMG">
+                    </div>
+    
+                    <div class="header-cart-item-txt">
+                      <a href="#" class="header-cart-item-name">
+                        Nixon Porter Leather Watch In Tan
+                      </a>
+    
+                      <span class="header-cart-item-info">
+                        1 x $17.00
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+    
+                <div class="header-cart-total">
+                  Total: $75.00
+                </div>
+    
+                <div class="header-cart-buttons">
+                  <div class="header-cart-wrapbtn">
+                    <!-- Button -->
+                    <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                      {{txtVoirPanier}}
+                    </a>
+                  </div>
+    
+                  <div class="header-cart-wrapbtn">
+                    <!-- Button -->
+                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                      {{txtReglerNote}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <ng-template #toggleBlock>
+              <a (click)=moveForm() onclick="togglePopup()" class="header-wrapicon1 dis-block">
+                <img src="assets/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+              </a>
+            </ng-template>
+          </div>
+    
+          <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Menu Mobile -->
+      <div class="wrap-side-menu">
+        <nav class="side-menu">
+          <ul class="main-menu">
+            <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+              <span class="topbar-child1">
+                {{txtTopbar}}
+              </span>
+            </li>
+    
+            <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+              <div class="topbar-child2-mobile">
+                <span class="topbar-email">
+                  {{txtInfoMail}}
+                </span>
+    
+                <div class="topbar-language rs1-select2">
+                  <select class="selection-1" name="time">
+                    <option>USD</option>
+                    <option>EUR</option>
+                  </select>
+                </div>
+              </div>
+            </li>
+    
+            <li class="item-topbar-mobile p-l-10">
+              <div class="topbar-social-mobile">
+                <a href="#" class="topbar-social-item fa fa-facebook"></a>
+                <a href="#" class="topbar-social-item fa fa-instagram"></a>
+                <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+                <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+                <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+              </div>
+            </li>
+    
+            <li class="item-menu-mobile">
+              <a href="accueil">{{txtAccueil}}</a>
+              <!-- <ul class="sub-menu">
+                  <li><a href="index.html">Homepage V1</a></li>
+                  <li><a href="home-02.html">Homepage V2</a></li>
+                  <li><a href="home-03.html">Homepage V3</a></li>
+                </ul> -->
+              <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+            </li>
+    
+            <li class="item-menu-mobile">
+              <a href="product.html">{{txtShopping}}</a>
+            </li>
+    
+            <!-- <li class="item-menu-mobile">
+                <a href="product.html">Sale</a>
+              </li>
+    
+              <li class="item-menu-mobile">
+                <a href="cart.html">Features</a>
+              </li>
+    
+              <li class="item-menu-mobile">
+                <a href="blog.html">Blog</a>
+              </li> -->
+    
+            <li class="item-menu-mobile">
+              <a href="about.html">{{txtAPropos}}</a>
+            </li>
+    
+            <li class="item-menu-mobile">
+              <a href="contact.html">{{txtContact}}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>

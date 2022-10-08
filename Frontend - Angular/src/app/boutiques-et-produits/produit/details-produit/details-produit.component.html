@@ -1,0 +1,680 @@
+<!-- /main: https://codepen.io/559wade/pen/LRzEjj -->
+<!-- <div class="main">
+	<h1>Auto Formatting Currency</h1>
+
+	<form method="post" action="#">
+		<label for="currency-field">Enter Amount</label>
+		<input type="text" name="currency-field" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
+			data-type="currency" placeholder="$1,000,000.00">
+		<button type="submit">Submit</button>
+	</form>
+
+	<p>Auto format currency input field with commas and decimals if needed. Text is automatically formated with commas
+		and cursor is placed back where user left off after formatting vs cursor moving to the end of the input.
+		Validation is on KeyUp and a final validation is done on blur.</p>
+
+	<p>To use just add the following to an input field:</p>
+
+	<pre>data-type="currency"</pre>
+
+</div> -->
+
+<!-- breadcrumb -->
+<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
+	<a href="/accueil" class="s-text16">
+		Accueil
+		<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+	</a>
+
+	<a href="product.html" class="s-text16">
+		Women
+		<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+	</a>
+
+	<a href="#" class="s-text16">
+		T-Shirt
+		<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+	</a>
+
+	<span class="s-text17">
+		{{this.produit.libelle}}
+	</span>
+</div>
+
+<!-- Détails Produit -->
+<div class="container bgwhite p-t-35 p-b-80">
+	<div class="flex-w flex-sb">
+		<div class="w-size13 p-t-30 respon5">
+			<div class="wrap-slick3 flex-sb flex-w">
+				<div class="wrap-slick3-dots">
+					<!-- <button class=" flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+						+
+					</button> -->
+					<!-- Bouton d'ajout d'illustration produit -->
+					<div *ngIf="utilisateurActuelEstProprietaire"
+						(click)="ajoutIllustration(this.produit.illustrations)">
+						<app-upload-fichier txtBoutonUpload='Ajouter' typeFichier="illustration"
+							(ngModelChange)="onCategorieSelectionnee($event)"> </app-upload-fichier>
+						<hr>
+					</div>
+				</div>
+				<!-- Illustrations Produit -->
+				<div class="slick3">
+					<!-- <div *ngFor="let illustration of listeIllustrations | async" -->
+					<div *ngFor="let illustration of this.produit.illustrations"
+						class="item-slick3 conteneur-illustration" [attr.data-thumb]="illustration.cheminFichier">
+						<div class="item-slick3 conteneur-illustration" [attr.data-thumb]="illustration.cheminFichier">
+							<div class="wrap-pic-w custom-resize-illustration">
+								<!-- Block Image Illustration -->
+								<div>
+									<!-- Si Utilisateur Proprietaire -->
+									<div *ngIf="utilisateurActuelEstProprietaire;">
+										<div class="block2">
+											<div class="block2-img wrap-pic-w of-hidden pos-relative">
+												<div class="conteneur-produit">
+													<img [src]="illustration.cheminFichier"
+														class="custom-resize-produit" alt="IMG-PRODUIT">
+												</div>
+												<div id="modificationImage" class="trans-0-4 block2-overlay">
+													<a href="javascript:"
+														class="block2-btn-addwishlist hov-pointer trans-0-4">
+														<i class="icon_close_alt"
+															(click)="supprimerIllustration(illustration.id)" aria-hidden="true"></i>
+														<!-- <i class="icon-wishlist icon_close_alt dis-none" aria-hidden="true"></i> -->
+													</a>
+
+													<!-- Bouton Test -->
+													<!-- <div class="block2-btn-addcart w-size1 trans-0-4">
+														<div class="upload-btn-wrapper">
+															<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">Modifier</button>
+															<input class="upload_fichier" type="file" name="myfile" />
+														</div>
+													</div> -->
+
+													<!-- Bouton Modifier / Upload Illustration Produit -->
+													<div class="upload-btn-wrapper block2-btn-addcart w-size1 trans-0-4"
+														(click)="modification(illustration)">
+														<app-upload-fichier txtBoutonUpload="Modifier"
+															typeFichier="illustration"></app-upload-fichier>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Si Utilisateur NON Proprietaire -->
+									<div *ngIf="!utilisateurActuelEstProprietaire;" class="block2">
+										<div class="block2-img wrap-pic-w of-hidden pos-relative">
+											<div class="conteneur-produit">
+												<img [src]="illustration.cheminFichier" class="custom-resize-produit"
+													alt="IMG-PRODUIT">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Illustration Suppress -->
+					<!-- <div class="item-slick3 conteneur-illustration"
+						data-thumb="http://127.0.0.1:8887/Produits/item-02.jpg">
+						<div class="wrap-pic-w custom-resize-illustration">
+							<img src="http://127.0.0.1:8887/Produits/item-02.jpg" alt="IMG-PRODUIT">
+						</div>
+					</div>
+					<div class="item-slick3" data-thumb="http://127.0.0.1:8887/Produits/banner-03.jpg">
+						<div class="wrap-pic-w">
+							<img src="http://127.0.0.1:8887/Produits/banner-03.jpg" alt="IMG-PRODUIT">
+						</div>
+					</div>
+					<div class="item-slick3" data-thumb="http://127.0.0.1:8887/Produits/item-cart-02.jpg">
+						<div class="wrap-pic-w">
+							<img src="http://127.0.0.1:8887/Produits/item-cart-02.jpg" alt="IMG-PRODUCT">
+						</div>
+					</div>
+					<div class="item-slick3" data-thumb="http://127.0.0.1:8887/Produits/shop-item-09.jpg">
+						<div class="wrap-pic-w">
+							<img src="http://127.0.0.1:8887/Produits/shop-item-09.jpg" alt="IMG-PRODUCT">
+						</div>
+					</div>
+					<div class="item-slick3" data-thumb="assets/images/thumb-item-01.jpg">
+						<div class="wrap-pic-w">
+							<img src="assets/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<!-- TEST -->
+		<!-- <app-upload-fichier></app-upload-fichier> -->
+
+		<!-- Partie Parametres Details Produits -->
+		<div class="w-size14 p-t-30 respon5">
+			<!-- Libelle Produit -->
+			<h4 class="m-text16 p-b-13">
+				<!-- <input (focusout)="saveProduit()" class="editable product-detail-name m-text16 p-b-13" contenteditable="true"  [(ngModel)]="this.produit.libelle"> -->
+				<input id="libelleProduit" [disabled]="estNonModifiable" (focusout)="saveProduit()" class="libelle"
+					[(ngModel)]="this.produit.libelle">
+			</h4>
+
+			<!-- Couleurs Produit Disponibles -->
+			<div *ngIf="!utilisateurActuelEstProprietaire">
+				<div *ngIf="!f">
+					<div class="flex-m flex-w">
+						<div class="s-text15 w-size15 t-center filter-color p-t-22 p-b-50">
+							Couleur(s)
+						</div>
+						<app-palette-couleurs [utilisateurEstProprietaire]="utilisateurActuelEstProprietaire"
+							[desactive]="true" [paletteCouleurs]="this.produit.couleurs"
+							(couleurEventEmmitter)="onCouleurSelectionne($event)"></app-palette-couleurs>
+					</div>
+				</div>
+			</div>
+
+			<!-- Prix Produit -->
+			<span class="m-text17">
+				<input id="prixProduit" [disabled]="estNonModifiable" (focusout)="saveProduit()" class="prix"
+					[(ngModel)]="produit.prix">
+				<!-- <input type="text" name="currency-field" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000,000.00" [(ngModel)]="this.produit.prix"> -->
+				<label class="flex-c-m">
+					FCFA
+				</label>
+			</span>
+
+			<!-- Slogan Boutique -->
+			<p async class="s-text8 p-t-10">
+				" {{this.sloganBoutique}} "
+			</p>
+
+			<hr>
+			<!-- Contact -->
+				<!--"proprietaire" mis à false pour forcer l'utilisateur à modifier les données de contacts au niveau de la boutique elle même -->
+			<app-contacts 
+				[utilisateurActuelEstProprietaire]="false"
+				[telephone]="produit?.boutique?.telephone" 
+				[whatsapp]="produit?.boutique?.whatsapp"
+				[lien]="lienProduit">
+			</app-contacts>
+
+			<!--  -->
+			<div class="p-t-33 p-b-60">
+				<!-- Tailles -->
+				<!-- <div class="flex-m flex-w p-b-10">
+						<div class="s-text15 w-size15 t-center">
+							Taille
+						</div>
+
+						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+							<select class="selection-2" name="size">
+								<option>Choisir une option</option>
+								<option>Size S</option>
+								<option>Size M</option>
+								<option>Size L</option>
+								<option>Size XL</option>
+							</select>
+						</div>
+					</div> -->
+
+				<!-- Options Vendeur -->
+				<span>
+					<!-- Choix Couleurs -->
+					<div *ngIf="utilisateurActuelEstProprietaire;">
+						<div class="flex-m flex-w">
+							<div class="s-text15 w-size15 t-center filter-color p-t-22 p-b-50">
+								Couleur(s) disponible(s)
+							</div>
+							<app-palette-couleurs [utilisateurEstProprietaire]="utilisateurActuelEstProprietaire"
+								[desactive]="false" [paletteCouleurs]="this.produit.couleurs"
+								(couleurEventEmmitter)="onCouleurSelectionne($event)">
+							</app-palette-couleurs>
+						</div>
+					</div>
+
+					<!-- Selection Catégorie -->
+					<app-select *ngIf="utilisateurActuelEstProprietaire;" titreSelect="Catégorie"
+						[itemSelectionne]='categorieSelectionnee' [items]="categories"
+						(selectEventEmmitter)="onCategorieSelectionnee($event)"></app-select>
+
+					<!-- Selection Boutique -->
+					<app-select *ngIf="utilisateurActuelEstProprietaire;" titreSelect="Boutique"
+						[itemSelectionne]='boutiqueSelectionnee' [items]="boutiques"
+						(selectEventEmmitter)="onBoutiqueSelectionnee($event)"></app-select>
+				</span>
+
+
+				<!-- Options Acheteur -->
+				<!-- Choix Couleur -->
+				<div *ngIf="!utilisateurActuelEstProprietaire;" class="p-t-33 p-b-60">
+					<div class="flex-m flex-w">
+						<div class="s-text15 w-size15 t-center">
+							Couleur
+						</div>
+
+						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+							<select class="selection-2" name="color">
+								<option>Choisir une Couleur</option>
+								<option>Gray</option>
+								<option>Red</option>
+								<option>Black</option>
+								<option>Blue</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-r-m flex-w p-t-10">
+					<div class="w-size16 flex-m flex-w">
+						<div *ngIf="!utilisateurActuelEstProprietaire"
+							class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+							<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+								<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+							</button>
+
+							<input class="size8 m-text18 t-center num-product" type="number" name="num-product"
+								value="1">
+
+							<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+								<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+							</button>
+						</div>
+
+						<!-- Boutons -->
+						<!-- Boutons Acheteur -->
+						<div *ngIf="!utilisateurActuelEstProprietaire;"
+							class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+							<!-- Button -->
+							<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+								Ajouter <br> au Panier
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="p-b-45">
+					<span class="s-text8 m-r-35">SKU: MUG-01</span>
+					<span class="s-text8">Categories: Mug, Design</span>
+				</div> -->
+
+			<!-- Description -->
+			<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+				<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+					Description
+					<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+					<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+				</h5>
+
+				<div class="dropdown-content dis-none p-t-15 p-b-23">
+					<!-- <p class="s-text8">
+							{{this.produit.description}}
+						</p> -->
+					<!-- <input id="descriptionProduit" [disabled]="estNonModifiable" (focusout)="saveProduit()" class="s-text8" contenteditable="true" [(ngModel)]="this.produit.description"> -->
+					<textarea wrap="soft|hard" id="descriptionProduit" [disabled]="estNonModifiable"
+						(focusout)="saveProduit()" class="s-text8 de" contenteditable="true"
+						[(ngModel)]="this.produit.description">
+
+					</textarea>
+				</div>
+			</div>
+			<!-- Test Upload -->
+			<!-- <div class="form-group">
+				<label for="file">Choose File</label>
+				<input type="file"
+					   id="file"
+					   (change)="handleFileInput($event.target.files)">
+			</div> -->
+			<!-- Boutons Partager Produit sur les Réseaux Sociaux-->
+			<div class="container">
+				<div class="p-t-15 p-b-14">
+					<h2 class="flex-sb-m m-text19 trans-0-4">
+						Partager ce Produit
+					</h2>
+				</div>
+
+				<div class="social">
+					<a [href]="'https://api.whatsapp.com/send?text='+lienProduit" target="_blank" id="share-wa"
+						class="sharer button"><i class="fa fa-3x fa-whatsapp"></i></a>
+					<a [href]="'https://www.facebook.com/sharer/sharer.php?u='+lienProduit" target="_blank"
+						id="share-fb" class="sharer button"><i class="fa fa-3x fa-facebook-square"></i></a>
+					<a [href]="'http://twitter.com/share?url='+lienProduit" id="share-tw" class="sharer button"><i
+							class="fa fa-3x fa-twitter-square"></i></a>
+					<a [href]="'https://www.linkedin.com/shareArticle?mini=true&url='+lienProduit" id="share-li"
+						class="sharer button"><i class="fa fa-3x fa-linkedin-square"></i></a>
+					<!-- <a href="#" id="share-gp" class="sharer button"><i class="fa fa-3x fa-google-plus-square"></i></a> -->
+					<a href="#" id="share-em" class="sharer button"><i class="fa fa-3x fa-envelope-square"></i></a>
+				</div>
+			</div>
+
+			<hr>
+
+			<!-- Bouton Supprimer Produit -->
+			<div *ngIf="utilisateurActuelEstProprietaire;">
+				<!-- flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 -->
+
+				<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+					Supprimer <br> Produit
+				</button>
+			</div>
+
+			<!-- <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Additional information
+						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+					</h5>
+
+					<div class="dropdown-content dis-none p-t-15 p-b-23">
+						<p class="s-text8">
+							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+						</p>
+					</div>
+				</div>
+
+				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Reviews (0)
+						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+					</h5>
+
+					<div class="dropdown-content dis-none p-t-15 p-b-23">
+						<p class="s-text8">
+							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+						</p>
+					</div>
+				</div> -->
+		</div>
+	</div>
+</div>
+
+<!-- Relate Product -->
+<section class="relateproduct bgwhite p-t-45 p-b-138">
+	<div class="container">
+		<div class="sec-title p-b-60">
+			<h3 class="m-text5 t-center">
+				<!-- Related Products -->
+				Dans la même Catégorie
+			</h3>
+		</div>
+
+		<!-- Slide2 -->
+		<div class="wrap-slick2">
+			<div class="slick2">
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<img src="http://127.0.0.1:8887/Models/4c7768f4802174b16f702ed23b4719e4.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Herschel supply co 25l
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								25 000 Francs
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="http://127.0.0.1:8887/Models/4fbdc86c58857ddd5fa8d72c7de559c7.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Denim jacket blue
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								30 000 Francs
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="http://127.0.0.1:8887/Models/4c7ab7f1ed0f490de0814170d8a4d362.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Coach slim easton black
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								30 000 Francs
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+							<img src="http://127.0.0.1:8887/Models/50717c4ca441e941f4c92ef469097809.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Frayed denim shorts
+							</a>
+
+							<span class="block2-oldprice m-text7 p-r-5">
+								30 000 Francs
+							</span>
+
+							<span class="block2-newprice m-text8 p-r-5">
+								19 000 Francs
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<img src="assets/images/item-02.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Herschel supply co 25l
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								$75.00
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="assets/images/item-03.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Denim jacket blue
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								$92.50
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="assets/images/item-05.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Coach slim easton black
+							</a>
+
+							<span class="block2-price m-text6 p-r-5">
+								$165.90
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+							<img src="assets/images/item-07.jpg" alt="IMG-PRODUCT">
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								Frayed denim shorts
+							</a>
+
+							<span class="block2-oldprice m-text7 p-r-5">
+								$29.50
+							</span>
+
+							<span class="block2-newprice m-text8 p-r-5">
+								$15.90
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>

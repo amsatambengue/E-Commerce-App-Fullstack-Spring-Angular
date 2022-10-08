@@ -1,0 +1,24 @@
+@import "../../../boutiques-et-produits/boutiques-et-produits.component.css";
+
+.custom-resize-logo{
+  display: block;
+  max-height: 100%;
+  width: auto;
+  margin: auto;
+}
+
+.conteneur-logo{
+  width: 100%;
+  height: 300px ;
+  margin: auto;
+  position: relative;                    
+  display: flex;
+  align-items: center;
+   
+}
+
+textarea {
+  width: 100%;
+}
+
+

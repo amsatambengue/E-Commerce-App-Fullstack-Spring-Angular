@@ -1,0 +1,14 @@
+<div class="p-t-33 p-b-60">
+    <div class="flex-m flex-w">
+        <div class="s-text15 w-size15 t-center">
+            {{titreSelect}}
+        </div>
+        <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+            <select class="select-css" [(ngModel)]="itemSelectionne" (ngModelChange)="onItemSelectionne($event)" >
+                <option *ngFor="let item of items" [value]="item.nom">
+                    {{item.nom}}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>

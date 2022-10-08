@@ -1,0 +1,32 @@
+  /* IDs class editable
+
+libelleProduit
+prixProduit
+descriptionProduit
+
+nomBoutique
+sloganBoutique
+descriptionBoutique
+ */
+
+.editable {
+    transition: width 0.4s ease-in-out;
+    /* border: 2px solid blue; */
+    /* background-image: url('../../../../assets/editicon2.png'); */
+    /* background-image: url('../../../../editicon.png'); */
+    /* background-position: 10px 10px; */
+    background-size: contain;
+    width: 100%;
+
+  }
+  
+  .editable:focus  {
+    color: white;
+    border-radius: 4px;
+    background-color: lightgreen;
+    border: 2px solid green;
+  }
+  .editable:hover  {
+    color: rgb(59, 59, 59);
+    background-color: rgb(221, 220, 220);
+  }

@@ -1,0 +1,81 @@
+
+    <!-- Filtre Haut de Page  -->
+    <div class="flex-sb-m flex-w p-b-35">
+        <div class="flex-w">
+            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                <select class="selection-2" name="sorting">
+                    <option>Tri par défaut</option>
+                    <option>Popularity</option>
+                    <option>Price: low to high</option>
+                    <option>Price: high to low</option>
+                </select>
+            </div>
+
+            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                <select class="selection-2" name="sorting">
+                    <option>Prix</option>
+                    <option>$0.00 - $50.00</option>
+                    <option>$50.00 - $100.00</option>
+                    <option>$100.00 - $150.00</option>
+                    <option>$150.00 - $200.00</option>
+                    <option>$200.00+</option>
+
+                </select>
+            </div>
+        </div>
+
+        <span class="s-text8 p-t-5 p-b-5">
+            Affichage des résultats 1–12 sur 16
+        </span>
+    </div>
+
+    <!--Listes Boutiques -->
+    <div class="row">
+        <!-- Boutique -->
+        <div *ngFor="let boutique of boutiques" class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+            <!-- Block2 -->
+            <div class="block2">
+                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                    <div class="conteneur-logo">
+                        <img id="logo" class="custom-resize-logo" [src]="boutique.logo.cheminFichier" alt="IMG-PRODUIT">
+                    </div>
+                    <div class="block2-overlay trans-0-4">
+
+                        <div [href]="boutique.nom" class="block2-btn-addcart w-size1 trans-0-4">
+                            <!-- Button -->
+                            <button [href]="boutique.nom" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                Visiter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block2-txt p-t-20">
+                    <a [href]="boutique.nom" class="block2-name dis-block s-text3 p-b-5">
+                        {{boutique.nom}}
+                    </a>
+
+                    <span class="block2-price m-text6 p-r-5">
+                        {{boutique.slogan}}
+                    </span>
+
+                </div>
+
+            </div>
+            <app-notation class="star"></app-notation>
+        </div>
+
+     
+
+
+  
+    </div>
+    <!-- Pagination -->
+    <div class="pagination flex-m flex-w p-t-26">
+        <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
+        <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+    </div>
+
+	<!-- Container Selection -->
+	<!-- <div id="dropDownSelect1"></div>
+	<div id="dropDownSelect2"></div> -->
