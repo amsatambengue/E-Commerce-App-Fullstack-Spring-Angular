@@ -27,7 +27,7 @@ public class BoutiqueController {
 	@Autowired
 	private ProduitRepository produitRepository;
 	
-	@GetMapping("")
+	@GetMapping()
 	public  List<Boutique> listerBoutiques() {
 
 	    return boutiqueRepository.findAll();

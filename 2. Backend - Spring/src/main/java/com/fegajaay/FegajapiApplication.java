@@ -1,5 +1,7 @@
 package com.fegajaay;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.annotation.Order;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fegajaay.config.SecurityConfig;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Order(1)
 //@Configuration
